@@ -6,24 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Page title -->
     <title>EcoTracker - Your Environmental Companion</title>
-    <!-- External CSS stylesheets or internal styles -->
+    <!-- External CSS stylesheet -->
     <link rel="stylesheet" href="styles.css">
-    <script src=" src/index.js"></script>
 </head>
 <body>
     <!-- Header section -->
     <header>
         <!-- Main heading with a welcoming message -->
         <h1>Welcome to EcoTracker</h1>
-        <!-- Navigation menu for easy access to different sections -->
-        <nav>
-            <ul>
-                <!-- Links to different sections within the page -->
-                <li><a href="#carbon-calculator">Carbon Emissions Calculator</a></li>
-                <li><a href="#carbon-footprint-tracker">Personal Carbon Footprint Tracker</a></li>
-                <li><a href="#environmental-impact-comparison">Environmental Impact Comparison Tool</a></li>
-            </ul>
-        </nav>
     </header>
 
     <!-- Main content sections -->
@@ -32,24 +22,20 @@
     <section id="carbon-calculator">
         <!-- Section heading -->
         <h2>Carbon Emissions Calculator</h2>
-        <!-- Description of the feature -->
-        <p>EcoTracker integrates the Carbon Interface API to allow users to calculate carbon emissions for common activities such as driving, flying, or household energy usage. Users input parameters like distance traveled, fuel type, or energy consumption, and the application provides estimates of CO2 emissions associated with those activities.</p>
-    </section>
-
-    <!-- Personal Carbon Footprint Tracker section -->
-    <section id="carbon-footprint-tracker">
-        <!-- Section heading -->
-        <h2>Personal Carbon Footprint Tracker</h2>
-        <!-- Description of the feature -->
-        <p>EcoTracker provides users with a personal carbon footprint tracker that aggregates data from their calculated emissions over time. Users can input their activities regularly, track their carbon footprint trends, set reduction goals, and receive personalized recommendations for adopting more eco-friendly habits.</p>
-    </section>
-
-    <!-- Environmental Impact Comparison Tool section -->
-    <section id="environmental-impact-comparison">
-        <!-- Section heading -->
-        <h2>Environmental Impact Comparison Tool</h2>
-        <!-- Description of the feature -->
-        <p>EcoTracker enables users to compare the environmental impact of different lifestyle choices and activities. By inputting parameters for various options (e.g., driving vs. cycling, eating meat vs. plant-based diet), users can see the corresponding carbon emissions estimates and make informed decisions to minimize their environmental footprint.</p>
+        <!-- Form to input parameters -->
+        <form id="carbon-calculator-form">
+            <label for="activity">Activity:</label>
+            <input type="text" id="activity" name="activity" placeholder="e.g., transportation"><br><br>
+            <label for="distance">Distance:</label>
+            <input type="number" id="distance" name="distance" placeholder="Enter distance"><br><br>
+            <label for="distance_unit">Distance Unit:</label>
+            <input type="text" id="distance_unit" name="distance_unit" placeholder="e.g., kilometre"><br><br>
+            <label for="fuel_type">Fuel Type:</label>
+            <input type="text" id="fuel_type" name="fuel_type" placeholder="e.g., petrol"><br><br>
+            <button type="submit">Calculate Emissions</button>
+        </form>
+        <!-- Display area for emissions result -->
+        <div id="emissions-result"></div>
     </section>
 
     <!-- Footer section -->
@@ -57,5 +43,8 @@
         <!-- Copyright notice -->
         <p>&copy; 2024 EcoTracker. All rights reserved.</p>
     </footer>
+
+    <!-- JavaScript file -->
+    <script src="index.js"></script>
 </body>
 </html>

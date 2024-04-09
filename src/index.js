@@ -1,9 +1,11 @@
 document.addEventListener('DOMContentLoaded', function () {
     const apiUrl = "https://api.carboninterface.com/v1/estimates";
-    const apiKey = "Bearer FKLvfXlmZBiSOLU9c46dQ "; 
+    const apiKey = "Bearer FKLvfXlmZBiSOLU9c46dQ"; // Replace 'YOUR_API_KEY_HERE' with your actual API key
+
     // Function to calculate carbon emissions for different activities
     function calculateEmissions(activity, parameters) {
         // Make API call to Carbon Interface API
+        console.log("Making API call to calculate emissions...");
         fetch(apiUrl, {
             method: 'POST',
             headers: {
@@ -18,6 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(response => response.json())
         .then(data => {
             // Process API response
+            console.log('API Response:', data);
             console.log('Estimated CO2 emissions:', data.data.attributes.carbon_g, 'grams');
         })
         .catch(error => {
@@ -28,12 +31,14 @@ document.addEventListener('DOMContentLoaded', function () {
     // Function to track personal carbon footprint
     function trackCarbonFootprint(activityData) {
         // Save activity data to user's profile or database
-        console.log('Activity data saved:', activityData);
+        console.log('Tracking personal carbon footprint...');
+        console.log('Activity data:', activityData);
     }
 
     // Function to compare environmental impacts of different activities
     function compareEnvironmentalImpacts(activity1, parameters1, activity2, parameters2) {
         // Make API calls for both activities
+        console.log('Comparing environmental impacts...');
         Promise.all([
             fetch(apiUrl, {
                 method: 'POST',
@@ -61,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(responses => Promise.all(responses.map(response => response.json())))
         .then(data => {
             // Process API responses and compare environmental impacts
-            console.log('Environmental Impact Comparison:');
+            console.log('API Responses:', data);
             console.log('Activity 1 - Estimated CO2 emissions:', data[0].data.attributes.carbon_g, 'grams');
             console.log('Activity 2 - Estimated CO2 emissions:', data[1].data.attributes.carbon_g, 'grams');
             if (data[0].data.attributes.carbon_g < data[1].data.attributes.carbon_g) {
@@ -87,31 +92,4 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Compare environmental impacts of driving vs. cycling
     compareEnvironmentalImpacts('transportation', { distance_unit: 'kilometre', distance_value: 50, fuel_type: 'petrol' }, 'transportation', { distance_unit: 'kilometre', distance_value: 10, fuel_type: 'bicycle' });
-
-    // Event listener for button click
-    document.getElementById('calculateButton').addEventListener('click', function() {
-        calculateEmissions('transportation', { distance_unit: 'kilometre', distance_value: 50, fuel_type: 'petrol' });
-    });
-
-    // Event listener for form submission
-    document.getElementById('carbonFootprintForm').addEventListener('submit', function(event) {
-        event.preventDefault();
-        const formData = new FormData(event.target);
-        const activityData = {
-            activity: formData.get('activity'),
-            distance: formData.get('distance'),
-            fuel_type: formData.get('fuel_type')
-        };
-        trackCarbonFootprint(activityData);
-    });
-
-    // Event listener for select box change
-    document.getElementById('compareSelect').addEventListener('change', function(event) {
-        const selectedValue = event.target.value;
-        if (selectedValue === 'driving_vs_cycling') {
-            compareEnvironmentalImpacts('transportation', { distance_unit: 'kilometre', distance_value: 50, fuel_type: 'petrol' }, 'transportation', { distance_unit: 'kilometre', distance_value: 10, fuel_type: 'bicycle' });
-        } else if (selectedValue === 'other_activities') {
-            // Add comparison logic for other activities
-        }
-    });
 });
