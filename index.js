@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
     const apiUrl = "https://api.carboninterface.com/v1/estimates";
-    const apiKey = "Bearer FKLvfXlmZBiSOLU9c46dQ"; // Replace 'YOUR_API_KEY_HERE' with your actual API key
+    const apiKey = "Bearer FKLvfXlmZBiSOLU9c46dQ"; 
 
     // Function to calculate carbon emissions for different activities
     function calculateEmissions(activity, parameters) {
@@ -92,4 +92,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Compare environmental impacts of driving vs. cycling
     compareEnvironmentalImpacts('transportation', { distance_unit: 'kilometre', distance_value: 50, fuel_type: 'petrol' }, 'transportation', { distance_unit: 'kilometre', distance_value: 10, fuel_type: 'bicycle' });
+
+    // Array iteration example: Using forEach to iterate over activities
+    const activities = ['driving', 'flying', 'home_energy'];
+    activities.forEach(activity => {
+        console.log(`Calculating emissions for ${activity}...`);
+        calculateEmissions(activity, { distance_unit: 'kilometre', distance_value: 50, fuel_type: 'petrol' });
+    });
 });

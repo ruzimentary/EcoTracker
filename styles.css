@@ -1,81 +1,60 @@
-/* Reset default browser styles */
-* {
-    box-sizing: border-box;
+/* styles.css */
+
+/* Global styles */
+body {
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
 }
 
-/* Body styles */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
-    color: #333;
-    line-height: 1.6;
-}
-
-/* Header styles */
 header {
-    background-color: #2ecc71; /* Green color */
-    color: #fff;
+    background-color: #4CAF50;
+    color: white;
     padding: 20px;
     text-align: center;
 }
 
-header h1 {
-    font-size: 2rem;
-    margin-bottom: 10px;
+h1 {
+    margin: 0;
 }
 
-header nav ul {
-    list-style-type: none;
-}
-
-header nav ul li {
-    display: inline;
-    margin-right: 20px;
-}
-
-header nav ul li a {
-    color: #fff;
-    text-decoration: none;
+footer {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }
 
 /* Main content styles */
 section {
-    background-color: #fff;
     margin: 20px;
-    padding: 20px;
+}
+
+h2 {
+    color: #4CAF50;
+}
+
+/* Form styles */
+form {
+    border: 1px solid #ccc;
     border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-section h2 {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-}
-
-section p {
-    margin-bottom: 20px;
-}
-
-/* Footer styles */
-footer {
-    background-color: #34495e; /* Dark blue color */
-    color: #fff;
     padding: 20px;
-    text-align: center;
+    max-width: 400px;
+    margin: auto;
 }
 
-footer p {
-    font-size: 0.9rem;
+label {
+    font-weight: bold;
 }
 
-/* Links styles */
-a {
-    color: #2980b9; /* Blue color */
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
+input[type="text"],
+input[type="number"] {
+    width: calc(100% - 10px);
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
