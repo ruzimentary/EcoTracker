@@ -1,31 +1,29 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const apiUrl = "https://api.carboninterface.com/v1/estimates";
-    const apiKey = "Bearer FKLvfXlmZBiSOLU9c46dQ"; 
+    // Simulated data for carbon emissions
+    const simulatedData = {
+        driving: {
+            carbon_g: 1200 // Example value for driving emissions
+        },
+        flying: {
+            carbon_g: 2500 // Example value for flying emissions
+        },
+        home_energy: {
+            carbon_g: 800 // Example value for home energy emissions
+        }
+    };
 
     // Function to calculate carbon emissions for different activities
     function calculateEmissions(activity, parameters) {
-        // Make API call to Carbon Interface API
-        console.log("Making API call to calculate emissions...");
-        fetch(apiUrl, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': apiKey
-            },
-            body: JSON.stringify({
-                type: activity,
-                ...parameters
-            })
-        })
-        .then(response => response.json())
-        .then(data => {
-            // Process API response
-            console.log('API Response:', data);
-            console.log('Estimated CO2 emissions:', data.data.attributes.carbon_g, 'grams');
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
+        // Simulate API response
+        console.log("Simulating API call to calculate emissions...");
+        const data = simulatedData[activity];
+        if (data) {
+            // Process simulated API response
+            console.log('Simulated API Response:', data);
+            console.log('Estimated CO2 emissions:', data.carbon_g, 'grams');
+        } else {
+            console.error('Error: Activity not found');
+        }
     }
 
     // Function to track personal carbon footprint
@@ -37,66 +35,24 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Function to compare environmental impacts of different activities
     function compareEnvironmentalImpacts(activity1, parameters1, activity2, parameters2) {
-        // Make API calls for both activities
+        // Simulate API response
         console.log('Comparing environmental impacts...');
-        Promise.all([
-            fetch(apiUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': apiKey
-                },
-                body: JSON.stringify({
-                    type: activity1,
-                    ...parameters1
-                })
-            }),
-            fetch(apiUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': apiKey
-                },
-                body: JSON.stringify({
-                    type: activity2,
-                    ...parameters2
-                })
-            })
-        ])
-        .then(responses => Promise.all(responses.map(response => response.json())))
-        .then(data => {
-            // Process API responses and compare environmental impacts
-            console.log('API Responses:', data);
-            console.log('Activity 1 - Estimated CO2 emissions:', data[0].data.attributes.carbon_g, 'grams');
-            console.log('Activity 2 - Estimated CO2 emissions:', data[1].data.attributes.carbon_g, 'grams');
-            if (data[0].data.attributes.carbon_g < data[1].data.attributes.carbon_g) {
+        const data1 = simulatedData[activity1];
+        const data2 = simulatedData[activity2];
+        if (data1 && data2) {
+            // Process simulated API responses and compare environmental impacts
+            console.log('Activity 1 - Estimated CO2 emissions:', data1.carbon_g, 'grams');
+            console.log('Activity 2 - Estimated CO2 emissions:', data2.carbon_g, 'grams');
+            if (data1.carbon_g < data2.carbon_g) {
                 console.log('Activity 1 has a lower environmental impact.');
-            } else if (data[0].data.attributes.carbon_g > data[1].data.attributes.carbon_g) {
+            } else if (data1.carbon_g > data2.carbon_g) {
                 console.log('Activity 2 has a lower environmental impact.');
             } else {
                 console.log('Both activities have the same environmental impact.');
             }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
+        } else {
+            console.error('Error: Activity not found');
+        }
     }
 
-    // Example usage:
-    // Calculate emissions for driving
-    calculateEmissions('transportation', { distance_unit: 'kilometre', distance_value: 50, fuel_type: 'petrol' });
-
-    // Track personal carbon footprint
-    const activityData = { activity: 'driving', distance: 50, fuel_type: 'petrol' };
-    trackCarbonFootprint(activityData);
-
-    // Compare environmental impacts of driving vs. cycling
-    compareEnvironmentalImpacts('transportation', { distance_unit: 'kilometre', distance_value: 50, fuel_type: 'petrol' }, 'transportation', { distance_unit: 'kilometre', distance_value: 10, fuel_type: 'bicycle' });
-
-    // Array iteration example: Using forEach to iterate over activities
-    const activities = ['driving', 'flying', 'home_energy'];
-    activities.forEach(activity => {
-        console.log(`Calculating emissions for ${activity}...`);
-        calculateEmissions(activity, { distance_unit: 'kilometre', distance_value: 50, fuel_type: 'petrol' });
-    });
-});
+   
