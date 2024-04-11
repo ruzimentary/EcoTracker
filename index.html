@@ -4,50 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EcoTracker - Your Environmental Companion</title>
-    <title>Carbon Emmissions Calculator</title>
-    <style>
-        /* Basic styling for the calculator */
-        body {
-            font-family: Arial, sans-serif;
-        }
-        .calculator {
-            width: 300px;
-            margin: 0 auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            background-color: #f9f9f9;
-        }
-        .calculator input {
-            width: 100%;
-            margin-bottom: 10px;
-            padding: 5px;
-            box-sizing: border-box;
-        }
-        .calculator button {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 5px;
-            border: none;
-            border-radius: 3px;
-            background-color: #4caf50;
-            color: #fff;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        .calculator button:hover {
-            background-color: #45a049;
-        }
-        .calculator button.clear {
-            background-color: #f44336;
-        }
-        .calculator button.clear:hover {
-            background-color: #d32f2f;
-        }
-    </style>
-</head>
-<body>
-   
     <link rel="stylesheet" href="styles.css">
     <style>
         /* CSS styles for the results box */
@@ -66,11 +22,15 @@
     </header>
 
     <!-- Main content sections -->
-    <form id="carbonForm">
-        <label for="country">Country:</label>
-        <select id="country" name="country" class="form-control" autocomplete="off">
-            <!-- Countries will be dynamically added here -->
-            <option value="Afghanistan">Afghanistan</option>
+    <section id="carbon-calculator" class="calculator">
+        <!-- Section heading -->
+        <h2>Carbon Emissions Calculator</h2>
+        <!-- Form to input parameters -->
+        <form id="carbonForm">
+            <label for="country">Country:</label>
+            <select id="country" name="country" class="form-control" autocomplete="off">
+
+                <option value="Afghanistan">Afghanistan</option>
                 <option value="Åland Islands">Åland Islands</option>
                 <option value="Albania">Albania</option>
                 <option value="Algeria">Algeria</option>
@@ -314,17 +274,8 @@
                 <option value="Yemen">Yemen</option>
                 <option value="Zambia">Zambia</option>
                 <option value="Zimbabwe">Zimbabwe</option>
-            </select>
-        </select><br><br>
-
-    <!-- Carbon Emissions Calculator section -->
-    <section id="carbon-calculator">
-        <!-- Section heading -->
-        <h2>Carbon Emissions Calculator</h2>
-        <!-- Form to input parameters -->
-
-        </form>
-        <form id="carbon-calculator-form">
+                
+            </select><br><br>
             <input type="number" id="electricity" placeholder="Electricity (kWh)">
             <input type="number" id="gas" placeholder="Gas (m³)">
             <input type="number" id="car" placeholder="Car (km)">
@@ -332,19 +283,12 @@
             <input type="number" id="flight" placeholder="Flight (km)">
             <button type="submit">Calculate Emissions</button>
         </form>
-        <div id="emissions-result"></div>
-        <div id="results"></div>
-
-
-        
         <!-- Display area for emissions result -->
-        <div id="emissions-result"></div>
+        <div id="results"></div>
     </section>
 
     <!-- Footer section -->
-    </div>
     <footer>
-    
         <!-- Copyright notice -->
         <p>&copy; 2024 EcoTracker. All rights reserved.</p>
     </footer>
