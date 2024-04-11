@@ -1,58 +1,56 @@
 document.addEventListener('DOMContentLoaded', function () {
-    // Simulated data for carbon emissions
-    const simulatedData = {
-        driving: {
-            carbon_g: 1200 // Example value for driving emissions
-        },
-        flying: {
-            carbon_g: 2500 // Example value for flying emissions
-        },
-        home_energy: {
-            carbon_g: 800 // Example value for home energy emissions
-        }
-    };
+    const apiUrl = "https://www.carboninterface.com/api/v1/estimates";
+    const apiKey = "Bearer FKLvfXlmZBiSOLU9c46dQ"; 
 
-    // Function to calculate carbon emissions for different activities
-    function calculateEmissions(activity, parameters) {
-        // Simulate API response
-        console.log("Simulating API call to calculate emissions...");
-        const data = simulatedData[activity];
-        if (data) {
-            // Process simulated API response
-            console.log('Simulated API Response:', data);
-            console.log('Estimated CO2 emissions:', data.carbon_g, 'grams');
-        } else {
-            console.error('Error: Activity not found');
-        }
-    }
-
-    // Function to track personal carbon footprint
-    function trackCarbonFootprint(activityData) {
-        // Save activity data to user's profile or database
-        console.log('Tracking personal carbon footprint...');
-        console.log('Activity data:', activityData);
-    }
-
-    // Function to compare environmental impacts of different activities
-    function compareEnvironmentalImpacts(activity1, parameters1, activity2, parameters2) {
-        // Simulate API response
-        console.log('Comparing environmental impacts...');
-        const data1 = simulatedData[activity1];
-        const data2 = simulatedData[activity2];
-        if (data1 && data2) {
-            // Process simulated API responses and compare environmental impacts
-            console.log('Activity 1 - Estimated CO2 emissions:', data1.carbon_g, 'grams');
-            console.log('Activity 2 - Estimated CO2 emissions:', data2.carbon_g, 'grams');
-            if (data1.carbon_g < data2.carbon_g) {
-                console.log('Activity 1 has a lower environmental impact.');
-            } else if (data1.carbon_g > data2.carbon_g) {
-                console.log('Activity 2 has a lower environmental impact.');
-            } else {
-                console.log('Both activities have the same environmental impact.');
+    // Function to fetch carbon emissions data from the Carbon Interface API
+    function fetchCarbonEmissions(activity, parameters) {
+        const urlParams = new URLSearchParams(parameters);
+        fetch(`${apiUrl}?type=${activity}&${urlParams}`, {
+            method: 'GET',
+            headers: {
+                'Authorization': apiKey
             }
-        } else {
-            console.error('Error: Activity not found');
-        }
+        })
+        .then(response => response.json())
+        .then(data => {
+            displayResult(activity, data);
+        })
+        .catch(error => {
+            console.error('Error fetching carbon emissions:', error);
+        });
     }
 
-   
+    // Function to display result in a box
+    function displayResult(activity, data) {
+        console.log(data); 
+        const emissions = data.data.attributes.carbon_g;
+        const resultBox = document.createElement('div');
+        resultBox.classList.add('result-box');
+        resultBox.textContent = `Estimated CO2 emissions for ${activity}: ${emissions.toFixed(2)} grams`;
+        document.getElementById('emissions-result').innerHTML = ''; // Clear previous result
+        document.getElementById('emissions-result').appendChild(resultBox);
+    }
+    
+
+    // Event listeners for different activities
+    const calculateDrivingBtn = document.getElementById('calculateDriving');
+    if (calculateDrivingBtn) {
+        calculateDrivingBtn.addEventListener('click', function () {
+            fetchCarbonEmissions('transportation', { distance_unit: 'kilometre', distance_value: 50, fuel_type: 'petrol' });
+        });
+    }
+
+    const calculateCyclingBtn = document.getElementById('calculateCycling');
+    if (calculateCyclingBtn) {
+        calculateCyclingBtn.addEventListener('click', function () {
+            fetchCarbonEmissions('transportation', { distance_unit: 'kilometre', distance_value: 10, fuel_type: 'bicycle' });
+        });
+    }
+
+    const calculateWalkingBtn = document.getElementById('calculateWalking');
+    if (calculateWalkingBtn) {
+        calculateWalkingBtn.addEventListener('click', function () {
+            fetchCarbonEmissions('transportation', { distance_unit: 'kilometre', distance_value: 5, fuel_type: 'walk' });
+        });
+    }
+});

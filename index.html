@@ -5,6 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EcoTracker - Your Environmental Companion</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* CSS styles for the results box */
+        .result-box {
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -30,6 +39,7 @@
             <input type="text" id="fuel_type" name="fuel_type" placeholder="e.g., petrol"><br><br>
             <button type="submit">Calculate Emissions</button>
         </form>
+
         <!-- Display area for emissions result -->
         <div id="emissions-result"></div>
     </section>
@@ -40,7 +50,52 @@
         <p>&copy; 2024 EcoTracker. All rights reserved.</p>
     </footer>
 
-    <!-- JavaScript file -->
-    <script src="index.js"></script>
+    <!-- JavaScript code -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const apiUrl = "https://www.carboninterface.com/api/v1/estimates";
+            const apiKey = "Bearer FKLvfXlmZBiSOLU9c46dQ"; 
+
+            // Function to fetch carbon emissions data from the Carbon Interface API
+            function fetchCarbonEmissions(activity, parameters) {
+                const urlParams = new URLSearchParams(parameters);
+                fetch(`${apiUrl}?type=${activity}&${urlParams}`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': apiKey
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    displayResult(activity, data);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            }
+
+            // Function to display result in a box
+            function displayResult(activity, data) {
+                const emissions = data.data.attributes.carbon_g;
+                const resultBox = document.createElement('div');
+                resultBox.classList.add('result-box');
+                resultBox.textContent = `Estimated CO2 emissions for ${activity}: ${emissions.toFixed(2)} grams`;
+                document.getElementById('emissions-result').innerHTML = ''; // Clear previous result
+                document.getElementById('emissions-result').appendChild(resultBox);
+            }
+
+            // Event listener for form submission
+            document.getElementById('carbon-calculator-form').addEventListener('submit', function (event) {
+                event.preventDefault(); // Prevent form submission
+
+                const activity = document.getElementById('activity').value;
+                const distance = document.getElementById('distance').value;
+                const distanceUnit = document.getElementById('distance_unit').value;
+                const fuelType = document.getElementById('fuel_type').value;
+
+                fetchCarbonEmissions(activity, { distance_unit: distanceUnit, distance_value: distance, fuel_type: fuelType });
+            });
+        });
+    </script>
 </body>
 </html>
