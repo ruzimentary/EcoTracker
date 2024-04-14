@@ -25,7 +25,6 @@ document.addEventListener('DOMContentLoaded', function () {
             const car = parseFloat(document.getElementById('car').value);
             const train = parseFloat(document.getElementById('train').value);
             const flight = parseFloat(document.getElementById('flight').value);
-            const selectedCountry = document.getElementById('country').value;
 
             console.log("Form submitted!");
             console.log("Electricity:", electricity);
@@ -33,26 +32,49 @@ document.addEventListener('DOMContentLoaded', function () {
             console.log("Car:", car);
             console.log("Train:", train);
             console.log("Flight:", flight);
-            console.log("Selected Country:", selectedCountry);
 
-            fetch(apiUrl + `?country=${selectedCountry}`, {
-                method: 'POST',
-                headers: {
-                    'Authorization': apiKey
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log('API Response:', data);
-                const totalCarbon = calculateEmissions(data, electricity, gas, car, train, flight);
-                console.log('Total Carbon:', totalCarbon);
-                displayResults(totalCarbon, resultsDiv);
-            })
-            .catch(error => {
-                console.error('Error fetching data:', error);
-            });
+            fetchCarbonEmissions('electricity-grid', electricity, 'kWh');
+            fetchCarbonEmissions('natural-gas', gas, 'm3');
+            fetchCarbonEmissions('passenger-car', car, 'km');
+            fetchCarbonEmissions('train-travel', train, 'km');
+            fetchCarbonEmissions('air-travel', flight, 'km');
         });
     } else {
         console.error("Form element not found!");
     }
 });
+
+function fetchCarbonEmissions(activityId, value, unit) {
+    const requestBody = JSON.stringify({
+        emission_factor: {
+            activity_id: activityId
+        },
+        parameters: {
+            value: value,
+            unit: unit
+        }
+    });
+
+    fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+            'Authorization': apiKey,
+            'Content-Type': 'application/json'
+        },
+        body: requestBody
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('API Response:', data);
+        const totalCarbon = calculateEmissions(data, value);
+        displayResults(totalCarbon, resultsDiv);
+    })
+    .catch(error => {
+        console.error('Error fetching data:', error);
+    });
+}
