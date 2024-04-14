@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
     const apiUrl = "https://api.climatiq.io/data/v1/estimate";
-    const apiKey = "Bearer THYMBSB5JJ444GQSRB6Z8HTK686G";
+    const apiKey = "Bearer JY2DYXFJTWMP6TN8NDT5SWSGB0F3";
 
     const form = document.getElementById('carbonForm');
     const resultsDiv = document.getElementById('results');
@@ -56,11 +56,4 @@ function calculateEmissions(data, electricity, gas, car, train, flight) {
     // For now, I'll provide a placeholder calculation
     let emissions = electricity + gas + car + train + flight;
     return emissions;
-}
-
-function displayResults(totalCarbon, resultsDiv) {
-    console.log("Total Carbon:", totalCarbon);
-    // Display the total carbon footprint
-    resultsDiv.innerHTML = `<p>Total Carbon Footprint: ${totalCarbon.toFixed(2)} kg CO2e</p>`;
-    console.log("Results displayed!");
 }
