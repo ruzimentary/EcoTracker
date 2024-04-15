@@ -20,6 +20,7 @@ Git clone https://github.com/ruzimentary/EcoTracker.git
 
 ### Deployment
 This project is deployed on GitHub Pages. Access the live site using the following link:
+https://github.com/ruzimentary/EcoTracker/tree/master
 
 ## Bugs
 Should you find any bugs, feel free to open an issue [here](https://github.com/ruzimentary/ecotracker/issues) detailing the problem and steps to reproduce. Suggestions for improvement are also welcome.
