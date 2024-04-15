@@ -1,14 +1,21 @@
-/* Base styles */
+Base styles
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f0f9f4; /* light green background for a fresh look */
+    font-family: 'Times New Roman', sans-serif;
     color: #333;
     margin: 0;
     padding: 20px;
+    background-image: url('https://www.earthreminder.com/wp-content/uploads/2023/11/climate-change-drawing-ideas-7.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; 
 }
 
 h1 {
-    color: #036; /* deep blue for headings */
+    color: rgb(0, 102, 51); 
+}
+
+h2 { 
+    color: rgb(2, 2, 2); 
 }
 
 /* Form styling */
