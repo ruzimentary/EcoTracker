@@ -26,7 +26,7 @@ if (form) {
         const train = parseFloat(document.getElementById('train').value);
         const flight = parseFloat(document.getElementById('flight').value);
 
-        const selectedCountry = document.getElementById('country').value;
+        const selectedRegion = document.getElementById('region').value;
 
         console.log("Form submitted!");
         console.log("Electricity:", electricity);
@@ -34,10 +34,10 @@ if (form) {
         console.log("Car:", car);
         console.log("Train:", train);
         console.log("Flight:", flight);
-        console.log("Selected Country:", selectedCountry);
+        console.log("Selected Region:", selectedRegion);
 
-        // Make API request to get data for the selected country
-        fetch(apiUrl + `?country=${selectedCountry}`, {
+        // Make API request to get data for the selected region
+        fetch(apiUrl + `?region=${selectedRegion}`, {
             method: 'POST',
             headers: {
                 'Authorization': apiKey
