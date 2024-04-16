@@ -4,7 +4,7 @@
 Andrew Wanyonyi Kipruto
 
 ## Description
-EcoTracker is an environmental impact tracking application designed to help individuals and organizations monitor and analyze their carbon footprint. The application calculates emissions based on various activities such as electricity usage, gas consumption, and transportation methods, providing insights into environmental impacts and suggesting ways to reduce them.
+EcoTracker is an environmental impact tracking application designed to help individuals and organizations monitor and analyze their carbon footprint. The application calculates emissions based on various activities such as electricity usage, gas consumption, and transportation methods.
 
 ## Project Setup Instructions
 You use git clone to be able to download the documents in the GitHub
@@ -23,7 +23,7 @@ This project is deployed on GitHub Pages. Access the live site using the followi
 https://github.com/ruzimentary/EcoTracker/tree/master
 
 ## Bugs
-Should you find any bugs, feel free to open an issue [here](https://github.com/ruzimentary/ecotracker/issues) detailing the problem and steps to reproduce. Suggestions for improvement are also welcome.
+Should you find any bugs, feel free to open an issue (https://github.com/ruzimentary/ecotracker/issues) detailing the problem and steps to reproduce. Suggestions for improvement are also welcome.
 
 ## License
 This project is licensed under the MIT License. 
